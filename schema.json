@@ -1,0 +1,210 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "osito",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "systemstatus",
+                    "slots": [],
+                    "samples": [
+                        "current status of the system",
+                        "is the system down",
+                        "system status",
+                        "whats the current status"
+                    ]
+                },
+                {
+                    "name": "servicestatus",
+                    "slots": [
+                        {
+                            "name": "servicename",
+                            "type": "LIST_OF_SERVICES",
+                            "samples": [
+                                "{servicename}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "i want to check the status of {servicename}",
+                        "whats the status {servicename}",
+                        "what is the status of {servicename}"
+                    ]
+                },
+                {
+                    "name": "allstatus",
+                    "slots": [],
+                    "samples": [
+                        "whats the status of all services",
+                        "What is the status of each service"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "LIST_OF_SERVICES",
+                    "values": [
+                        {
+                            "id": "unifiedAPI",
+                            "name": {
+                                "value": "unified a.p.i.",
+                                "synonyms": [
+                                    "unified a p i",
+                                    "unified "
+                                ]
+                            }
+                        },
+                        {
+                            "id": "MPS",
+                            "name": {
+                                "value": "m.p.s.",
+                                "synonyms": [
+                                    "m p s",
+                                    "MPS"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "3",
+                            "name": {
+                                "value": "dot com",
+                                "synonyms": [
+                                    "a.x.s.",
+                                    "axs",
+                                    "axs dot com"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "dynamoDb",
+                            "name": {
+                                "value": "dynamo db",
+                                "synonyms": [
+                                    "dynamodb"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "redisServer",
+                            "name": {
+                                "value": "redis",
+                                "synonyms": [
+                                    "red is"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "MPS.oracleDatabase",
+                            "name": {
+                                "value": "oracle",
+                                "synonyms": [
+                                    "oracle database"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "MPS.marketPlaceServices",
+                            "name": {
+                                "value": "market place services"
+                            }
+                        },
+                        {
+                            "id": "MPS.coreStack",
+                            "name": {
+                                "value": "core stack"
+                            }
+                        },
+                        {
+                            "id": "MPS.kinesis",
+                            "name": {
+                                "value": "kinesis"
+                            }
+                        },
+                        {
+                            "id": "flashService",
+                            "name": {
+                                "value": "flash service"
+                            }
+                        },
+                        {
+                            "id": "axsAPI",
+                            "name": {
+                                "value": "axe is a.p.i.",
+                                "synonyms": [
+                                    "access a.p.i."
+                                ]
+                            }
+                        },
+                        {
+                            "id": "axsAPI.postgres",
+                            "name": {
+                                "value": "post gres",
+                                "synonyms": [
+                                    "post gres database",
+                                    "post gres api"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "dialog": {
+            "intents": [
+                {
+                    "name": "servicestatus",
+                    "delegationStrategy": "ALWAYS",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "servicename",
+                            "type": "LIST_OF_SERVICES",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.111014924716.824735172198"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "delegationStrategy": "SKILL_RESPONSE"
+        },
+        "prompts": [
+            {
+                "id": "Elicit.Slot.111014924716.824735172198",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "tell me the service name"
+                    }
+                ]
+            },
+            {
+                "id": "Confirm.Slot.111014924716.824735172198",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "I heard {servicename} . is this correct?"
+                    }
+                ]
+            }
+        ]
+    }
+}
