@@ -6,7 +6,7 @@ const launchRequestHandler = {
         return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speechText = 'hi, you can ask, whats the system status or what is the status of a service or Whats the status of all services, for example, what is the status of unified <say-as interpret-as="interjection">a p i</say-as>. Which one would you like to try?';
+        const speechText = 'hi, you can ask, whats the current status or what is the status of a service or Whats the status of all services, for example, what is the status of unified <say-as interpret-as="interjection">a p i</say-as>. Which one would you like to try?';
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt('Do you want to know status of a service, just say, What is the status of unified a p i')
