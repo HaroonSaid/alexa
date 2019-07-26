@@ -1,7 +1,7 @@
 const { getStatus } = require('./systemstatus');
 
 
-const LaunchRequestHandler = {
+const launchRequestHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
     },
@@ -13,6 +13,7 @@ const LaunchRequestHandler = {
             .getResponse();
     }
 };
+// System Status
 const systemStatusIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -30,36 +31,11 @@ const systemStatusIntentHandler = {
             .getResponse();
     }
 };
-const incidentHistoryHandler = {
+// Specific Service Status by Slot
+const serviceStatusIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && handlerInput.requestEnvelope.request.intent.name === 'history';
-    },
-    handle(handlerInput) {
-        const speechText = 'The last incident was 10 days ago';
-        return handlerInput.responseBuilder
-            .speak(speechText)
-            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
-            .getResponse();
-    }
-}
-const incidentStatusHandler = {
-    canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && handlerInput.requestEnvelope.request.intent.name === 'currentincident';
-    },
-    handle(handlerInput) {
-        const speechText = 'There are no open incidents';
-        return handlerInput.responseBuilder
-            .speak(speechText)
-            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
-            .getResponse();
-    }
-}
-const systemStatusHandler = {
-    canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && handlerInput.requestEnvelope.request.intent.name === 'systemstatus';
+            && handlerInput.requestEnvelope.request.intent.name === 'servicestatus';
     },
     handle(handlerInput) {
         console.log('service status - handle');
@@ -79,7 +55,8 @@ const systemStatusHandler = {
             .getResponse();
     }
 }
-const allStatusHandler = {
+// All Services 
+const allServicesStatusIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
             && handlerInput.requestEnvelope.request.intent.name === 'allstatus';
@@ -155,4 +132,9 @@ function getSlotValues(filledSlots) {
   
     return slotValues;
   }
-module.exports.Ops = {allStatusHandler,systemStatusHandler,incidentStatusHandler,systemStatusIntentHandler, LaunchRequestHandler}
+module.exports.Ops = {
+    launchRequestHandler, 
+    systemStatusIntentHandler,
+    serviceStatusIntentHandler,
+    allServicesStatusIntentHandler
+}

@@ -83,12 +83,10 @@ const ErrorHandler = {
 // defined are included below. The order matters - they're processed top to bottom.
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
-        Ops.LaunchRequestHandler,
+        Ops.launchRequestHandler,
         Ops.systemStatusIntentHandler,
-        Ops.incidentStatusHandler,
-        Ops.incidentHistoryHandler,
-        Ops.systemStatusHandler,
-        Ops.allStatusHandler,
+        Ops.serviceStatusIntentHandler,
+        Ops.allServicesStatusIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler,
